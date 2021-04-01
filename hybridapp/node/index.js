@@ -1,0 +1,1 @@
+const varmy = require('./varmy');
