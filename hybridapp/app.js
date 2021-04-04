@@ -17,6 +17,17 @@ nunjucks.configure('template', {
 app.use(logger('dev'));
 app.use(express.json()); //app.use(bodyParser.json()) deprecated
 app.use(express.urlencoded({extended:false}));
+
+
+//routing path 추가
+app.use('/uploads', express.static('uploads'));
+
+//login variable
+app.use( (req, res,next) => {
+    app.locals.isLogin = false;
+    next();
+});
+
 app.get('/', (req,res) => {
     res.send('express start');
 });

@@ -10,6 +10,13 @@
 <body>
     <div class="container" style="padding-top:100px;">
 
+        {% if isLogin %}
+            로그인중
+        {% else %}
+            로그인이 안되었습니다.
+        {% endif %}
+
+
         {% block content %}{% endblock %}
 
     </div>    
