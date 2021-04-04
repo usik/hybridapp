@@ -1,16 +1,17 @@
 {
-  "name": "hybridapp",
+  "name": "express-online",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon -e js,html app.js"
+    "start": "npx nodemon -e js,html server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "morgan": "^1.10.0"
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "nunjucks": "^3.2.0"
   }
 }
