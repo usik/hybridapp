@@ -19,7 +19,7 @@ process.env.DB_USER, process.env.DB_PASSWORD,{
 });
 
 let db = [];
-
+// index.js 빼고 모든 js file 가져오기
 fs.readdirSync(__dirname)
     .filter(file => {
         return file.indexOf('.js')&& file !== 'index.js'
