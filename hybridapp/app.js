@@ -42,6 +42,7 @@ class App {
         //auth
         db.sequelize.authenticate().then( ()=>{
             console.log('Connection has been established successfully.');
+            return db.sequelize.sync();
         })
         .then(()=>{
             console.log('DB Sync Complete');
