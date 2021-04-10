@@ -1,21 +1,18 @@
 const models = require('../../models');
 
 exports.get_products = ( _ , res) => {
-    // res.render( 'admin/products.html' , 
-    //     { message : "hello" } // message 란 변수를 템플릿으로 내보낸다.
-    // );
-
     models.Products.findAll({
 
-    }).then ( (products) => {
-        //db에서 받은 products를 products변수명으로 내보냄
-        res.render('admin/products.html', {products:products});
+    }).then( (products) => {
+        // DB에서 받은 products를 products변수명으로 내보냄
+        res.render( 'admin/products.html' ,{ products : products });
     });
 }
 
 exports.get_products_write = ( _ , res) => {
     res.render( 'admin/write.html');
 }
+
 exports.post_products_write = ( req , res ) => {
     models.Products.create({
         name : req.body.name,
@@ -25,20 +22,12 @@ exports.post_products_write = ( req , res ) => {
         res.redirect('/admin/products');
     });
 }
+
 exports.get_products_detail = ( req , res ) => {
-
-    //callback hell극복하기
-    
-    const product1 = models.Products.findByPk(req.params.id).then( (product) => {
-        //res.render('admin/detail.html', { product: product });  
+    models.Products.findByPk(req.params.id).then( (product) => {
+        res.render('admin/detail.html', { product: product });  
     });
-
-    const product2 = models.Products.findByPk(req.params.id).then( (product) => {
-          
-    });
-
-    res.render('admin/detail.html', { product1: product1, product2: product2 });
-}; 
+};
 
 exports.get_products_edit = ( req , res ) => {
     //기존에 폼에 value안에 값을 셋팅하기 위해 만든다.
@@ -62,7 +51,7 @@ exports.post_products_edit = ( req , res ) => {
         res.redirect('/admin/products/detail/' + req.params.id );
     });
 
-};
+}
 
 exports.get_products_delete = ( req , res ) => {
     models.Products.destroy({
@@ -72,4 +61,4 @@ exports.get_products_delete = ( req , res ) => {
     }).then( () => {
         res.redirect('/admin/products');
     });
-}; 
+};
