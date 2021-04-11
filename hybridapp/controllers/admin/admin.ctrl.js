@@ -18,36 +18,31 @@ exports.get_products_write = ( _ , res) => {
 
 exports.post_products_write = async ( req , res ) => {
     
-    try{
-        const products = await models.Products.create({
+        await models.Products.create({
             name : req.body.name,
             price : req.body.price ,
             description : req.body.description
         });
-        res.redirect('/admin/products');
-    
-    }catch (e){
-        console.log(e);
-    }    
+        res.redirect('/admin/products'); 
     
 }
 
 exports.get_products_detail = async ( req , res ) => {
 
-    const products = await models.Products.findByPk(req.params.id);
+    const product = await models.Products.findByPk(req.params.id);
     res.render('admin/detail.html', { product: product });  
 };
 
-exports.get_products_edit = ( req , res ) => {
+exports.get_products_edit = async ( req , res ) => {
     //기존에 폼에 value안에 값을 셋팅하기 위해 만든다.
-    models.Products.findByPk(req.params.id).then( (product) => {
-        res.render('admin/write.html', { product : product });
-    });
+    const product= await models.Products.findByPk(req.params.id);
+    res.render('admin/write.html', { product : product });
+    
 };
 
-exports.post_products_edit = ( req , res ) => {
+exports.post_products_edit = async ( req , res ) => {
 
-    models.Products.update(
+    await models.Products.update(
         {
             name : req.body.name,
             price : req.body.price ,
@@ -56,9 +51,9 @@ exports.post_products_edit = ( req , res ) => {
         { 
             where : { id: req.params.id } 
         }
-    ).then( () => {
-        res.redirect('/admin/products/detail/' + req.params.id );
-    });
+    );
+    res.redirect('/admin/products/detail/' + req.params.id );
+    
 
 }
 
